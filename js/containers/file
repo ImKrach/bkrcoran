@@ -1,0 +1,165 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. Tous droits réservés.
+
+PS C:\Users\diela\Code> netstat -a -b -o | more
+PS C:\Users\diela\Code> netstat -a -b -o
+
+Connexions actives
+
+  Proto  Adresse locale         Adresse distante       État
+  TCP    0.0.0.0:135            DESKTOP-33P9KVP:0      LISTENING       416
+  RpcSs
+ [svchost.exe]
+  TCP    0.0.0.0:445            DESKTOP-33P9KVP:0      LISTENING       4
+ Impossible d’obtenir les informations de propriétaire
+  TCP    0.0.0.0:8081           DESKTOP-33P9KVP:0      LISTENING       2484
+ [node.exe]
+  TCP    0.0.0.0:34712          DESKTOP-33P9KVP:0      LISTENING       9432
+ [node.exe]
+  TCP    0.0.0.0:49664          DESKTOP-33P9KVP:0      LISTENING       676
+ Impossible d’obtenir les informations de propriétaire
+  TCP    0.0.0.0:49665          DESKTOP-33P9KVP:0      LISTENING       1360
+  EventLog
+ [svchost.exe]
+  TCP    0.0.0.0:49666          DESKTOP-33P9KVP:0      LISTENING       1380
+  Schedule
+ [svchost.exe]
+  TCP    0.0.0.0:49667          DESKTOP-33P9KVP:0      LISTENING       2972
+ [spoolsv.exe]
+  TCP    0.0.0.0:49676          DESKTOP-33P9KVP:0      LISTENING       744
+ Impossible d’obtenir les informations de propriétaire
+  TCP    0.0.0.0:49685          DESKTOP-33P9KVP:0      LISTENING       816
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:5037         DESKTOP-33P9KVP:0      LISTENING       10000
+ [adb.exe]
+  TCP    127.0.0.1:5037         DESKTOP-33P9KVP:56980  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:5037         DESKTOP-33P9KVP:56987  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:5037         DESKTOP-33P9KVP:57004  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:5037         DESKTOP-33P9KVP:57009  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:6942         DESKTOP-33P9KVP:0      LISTENING       4092
+ [idea64.exe]
+  TCP    127.0.0.1:8700         DESKTOP-33P9KVP:0      LISTENING       4192
+ [monitor.exe]
+  TCP    127.0.0.1:12025        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:12110        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:12119        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:12143        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:12465        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:12563        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:12993        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:12995        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:27275        DESKTOP-33P9KVP:0      LISTENING       2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    127.0.0.1:49942        DESKTOP-33P9KVP:49943  ESTABLISHED     4672
+ [firefox.exe]
+  TCP    127.0.0.1:49943        DESKTOP-33P9KVP:49942  ESTABLISHED     4672
+ [firefox.exe]
+  TCP    127.0.0.1:49944        DESKTOP-33P9KVP:49945  ESTABLISHED     564
+ [firefox.exe]
+  TCP    127.0.0.1:49945        DESKTOP-33P9KVP:49944  ESTABLISHED     564
+ [firefox.exe]
+  TCP    127.0.0.1:49946        DESKTOP-33P9KVP:49947  ESTABLISHED     4824
+ [firefox.exe]
+  TCP    127.0.0.1:49947        DESKTOP-33P9KVP:49946  ESTABLISHED     4824
+ [firefox.exe]
+  TCP    127.0.0.1:49950        DESKTOP-33P9KVP:49951  ESTABLISHED     3288
+ [firefox.exe]
+  TCP    127.0.0.1:49951        DESKTOP-33P9KVP:49950  ESTABLISHED     3288
+ [firefox.exe]
+  TCP    127.0.0.1:49995        DESKTOP-33P9KVP:49996  ESTABLISHED     1132
+ [firefox.exe]
+  TCP    127.0.0.1:49996        DESKTOP-33P9KVP:49995  ESTABLISHED     1132
+ [firefox.exe]
+  TCP    127.0.0.1:50009        DESKTOP-33P9KVP:50010  ESTABLISHED     5768
+ [firefox.exe]
+  TCP    127.0.0.1:50010        DESKTOP-33P9KVP:50009  ESTABLISHED     5768
+ [firefox.exe]
+  TCP    127.0.0.1:56876        DESKTOP-33P9KVP:56877  ESTABLISHED     4092
+ [idea64.exe]
+  TCP    127.0.0.1:56877        DESKTOP-33P9KVP:56876  ESTABLISHED     4092
+ [idea64.exe]
+  TCP    127.0.0.1:56878        DESKTOP-33P9KVP:56879  ESTABLISHED     4092
+ [idea64.exe]
+  TCP    127.0.0.1:56879        DESKTOP-33P9KVP:56878  ESTABLISHED     4092
+ [idea64.exe]
+  TCP    127.0.0.1:56968        DESKTOP-33P9KVP:56969  ESTABLISHED     4092
+ [idea64.exe]
+  TCP    127.0.0.1:56969        DESKTOP-33P9KVP:56968  ESTABLISHED     4092
+ [idea64.exe]
+  TCP    127.0.0.1:56972        DESKTOP-33P9KVP:56973  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:56973        DESKTOP-33P9KVP:56972  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:56976        DESKTOP-33P9KVP:56977  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:56977        DESKTOP-33P9KVP:56976  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:56980        DESKTOP-33P9KVP:5037   ESTABLISHED     4092
+ [idea64.exe]
+  TCP    127.0.0.1:56983        DESKTOP-33P9KVP:56984  ESTABLISHED     4192
+ [monitor.exe]
+  TCP    127.0.0.1:56984        DESKTOP-33P9KVP:56983  ESTABLISHED     4192
+ [monitor.exe]
+  TCP    127.0.0.1:56987        DESKTOP-33P9KVP:5037   ESTABLISHED     4192
+ [monitor.exe]
+  TCP    127.0.0.1:57002        DESKTOP-33P9KVP:57003  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:57003        DESKTOP-33P9KVP:57002  ESTABLISHED     10000
+ [adb.exe]
+  TCP    127.0.0.1:57004        DESKTOP-33P9KVP:5037   ESTABLISHED     4192
+ [monitor.exe]
+  TCP    127.0.0.1:57005        DESKTOP-33P9KVP:57006  ESTABLISHED     4192
+ [monitor.exe]
+  TCP    127.0.0.1:57006        DESKTOP-33P9KVP:57005  ESTABLISHED     4192
+ [monitor.exe]
+  TCP    127.0.0.1:57009        DESKTOP-33P9KVP:5037   ESTABLISHED     4192
+ [monitor.exe]
+  TCP    127.0.0.1:63342        DESKTOP-33P9KVP:0      LISTENING       4092
+ [idea64.exe]
+  TCP    192.168.0.28:139       DESKTOP-33P9KVP:0      LISTENING       4
+ Impossible d’obtenir les informations de propriétaire
+  TCP    192.168.0.28:49729     db5sch101110634:https  ESTABLISHED     3672
+  WpnService
+ [svchost.exe]
+  TCP    192.168.0.28:49857     185.189.92.233:https   ESTABLISHED     3440
+ [avgsvca.exe]
+  TCP    192.168.0.28:49889     ams10-003:http         ESTABLISHED     2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    192.168.0.28:49955     ec2-34-211-238-217:https  ESTABLISHED     4672
+ [firefox.exe]
+  TCP    192.168.0.28:50192     r-149-58-45-5:http     CLOSE_WAIT      3440
+ [avgsvca.exe]
+  TCP    192.168.0.28:51125     a92-122-180-83:https   CLOSE_WAIT      10856
+ [WinStore.App.exe]
+  TCP    192.168.0.28:51131     a92-122-180-83:https   CLOSE_WAIT      10856
+ [WinStore.App.exe]
+  TCP    192.168.0.28:51132     a92-122-180-83:https   CLOSE_WAIT      10856
+ [WinStore.App.exe]
+  TCP    192.168.0.28:51396     r-53-45-234-77:https   CLOSE_WAIT      2892
+ Impossible d’obtenir les informations de propriétaire
+  TCP    192.168.0.28:57058     dh-in-f99:https        ESTABLISHED     4672
+ [firefox.exe]
+  TCP    192.168.0.28:57060     dh-in-f94:https        ESTABLISHED     4672
+ [firefox.exe]
+  TCP    192.168.0.28:57064     fra02s18-in-f14:https  ESTABLISHED     4672
+ [firefox.exe]
+  TCP    192.168.0.28:57065     fra02s18-in-f14:https  ESTABLISHED     4672
+ [firefox.exe]
+  TCP    192.168.0.28:57067     par21s04-in-f170:https  ESTABLISHED     4672
+ [firefox.exe]
+  TCP    192.168.0.28:57077     fra02s18-in-f14:https  ESTABLISHED     4672
+ [firefox.exe]
+  TCP    192.168.0.28:57080     server-52-85-219-36:https  ESTABLISHED     4672
+ [firefox.exe]
