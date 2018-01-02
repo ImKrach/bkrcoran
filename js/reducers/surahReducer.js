@@ -5,7 +5,8 @@ const initialState = {
     ayahList: [],
     name:"",
     nameTranslated:"",
-    isLoading: false,
+    loading: false,
+    playing:false,
     error: false,
 }
 
@@ -16,7 +17,7 @@ export default surahReducer = (state = initialState, action) => {
         case FETCH_SURAH:
             return {
                 ...state,
-                isLoading: true,
+                loading: true,
                 name:"",
                 nameTranslated: "",
                 ayahList: []
@@ -27,10 +28,15 @@ export default surahReducer = (state = initialState, action) => {
             if (action.data[0].number !== 1) {
                 action.data[0].text = action.data[0].text.slice(39)
             }
+
+            // Adding playing = false for each ayah of the surah
+            for (let i = 0; i < action.data.length; i++) {
+                action.data[i].playing = false;
+            }
             
             return {
                 ...state,
-                isLoading: false,
+                loading: false,
                 ayahList: action.data,
                 surah: action.data[0].number,
                 name: action.meta.name,
@@ -41,7 +47,7 @@ export default surahReducer = (state = initialState, action) => {
         case FETCH_SURAH_FAILURE:
             return {
                 ...state,
-                isLoading: false,
+                loading: false,
                 error: true,
                 name: "",
                 nameTranslated: "",

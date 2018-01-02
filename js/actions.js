@@ -29,8 +29,7 @@ export function fetchSurah(surahNumber, quranEdition = 'quran-complete', where =
                         break;
                 }
 
-
-                surah = quran[surahNumber - 1]
+                surah = quran[surahNumber - 1];
                 dispatch(getSurahSuccess(surah.ayahs, { name: surah.name, nameTranslated: surah.englishName, playing: false }))
                 break;
 
@@ -46,9 +45,10 @@ export function fetchSurah(surahNumber, quranEdition = 'quran-complete', where =
                     // Erreur
                     dispatch(getSurahFailure(err))
                 });
+                break;
             default:
                 // Erreur
-                dispatch(getSurahFailure(err))
+                dispatch(getSurahFailure(err));
                 break;
         }
     }

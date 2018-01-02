@@ -8,9 +8,7 @@ import { StyleSheet,
     ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchSurah, fetchSurahList } from '../actions'
-
 import generalStyles from '../style'
-
 import Ayah from '../components/Ayah'
 import LectureHeader from '../components/LectureHeader'
 
@@ -68,7 +66,8 @@ class PageLecture extends React.PureComponent {
 
     // Si de nouvelles propriétés sont reçues
     componentWillReceiveProps(nextProps) {
-
+        console.log('on a recu de nouvelle props');
+        console.log(nextProps);
     }
 
     // Demande de la sourate #surahNumber
@@ -199,7 +198,7 @@ class PageLecture extends React.PureComponent {
     render() {
 
         // Une fois chargé, on affiche la vue
-        if (!this.props.surah.isLoading) {
+        if (!this.props.surah.loading) {
 
             return (
                 <View style={styles.superContainer}>
@@ -224,6 +223,7 @@ class PageLecture extends React.PureComponent {
 
         // Indicateur de chargement
         else {
+            console.log('on render a nouveau parce que on a des props super cools');
             return (
                 <ImageBackground
                     resizeMode={"center"}

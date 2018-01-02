@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableNativeFeedback } from 'react-native'
-import { Button, Badge, Icon } from 'react-native-elements'
+import { Button, Badge } from 'react-native-elements'
 
 export default class Ayah extends React.Component {
 
