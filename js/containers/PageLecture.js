@@ -12,6 +12,8 @@ import generalStyles from '../style'
 import Ayah from '../components/Ayah'
 import LectureHeader from '../components/LectureHeader'
 
+import Sound from "react-native-sound";
+
 const mapStateToProps = (state) => {
     return {
         surah: state.surahReducer,
@@ -26,15 +28,6 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-// Import the react-native-sound module
-const Sound = Platform.select({
-    ios: () => require('react-native-sound'),
-    android: () => require('react-native-sound'),
-})();
-
-// Enable playback in silence mode
-Sound.setCategory('Playback');
-
 class PageLecture extends React.PureComponent {
 
     static navigationOptions = {
@@ -48,11 +41,11 @@ class PageLecture extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        this.player = new Sound();
+        // Enable playback in silence mode
+        Sound.setCategory('Playback');
 
         this.state = {
             selected: new Map(),
-            playing: new Map()
         };
     }
 
@@ -66,8 +59,7 @@ class PageLecture extends React.PureComponent {
 
     // Si de nouvelles propriétés sont reçues
     componentWillReceiveProps(nextProps) {
-        console.log('on a recu de nouvelle props');
-        console.log(nextProps);
+       
     }
 
     // Demande de la sourate #surahNumber
@@ -83,13 +75,22 @@ class PageLecture extends React.PureComponent {
     };
 
     _onPauseSurah = (surahNumber) => {
-        // if (this.props.surah.playing && this.player !== undefined) {
-        //     this.player.pause();
-        // } else {
-        //     console.log('this state playing ', this.state.playing);
-        // }
+        if (this.player instanceof Sound) {
+            if (this.props.surah.playing) {
+                console.log("Pausing");
+                this.player.pause();
+            } else {
+                console.log("Playing");
+                this.player.play();
+            }
 
-        this.player.pause();
+            // Mise à jour de l'état playing
+            this.props.surah.playing = !this.props.surah.playing;
+            
+        } else {
+            console.log('Le player nexistait pas encore, on lance la ayah 0')
+            this._onPlayAyah(0);
+        }
     };
 
     _onPlayAyah = (index) => {
@@ -142,13 +143,14 @@ class PageLecture extends React.PureComponent {
     };
 
     _renderHeader = () => {
+        
         return (
             <LectureHeader
                 style={styles.lectureHeader}
                 name={this.props.surah.name}
                 id={this.props.surah.number}
                 data={this.props.surahList}
-                isPlaying={true}
+                isPlaying={this.props.surah.playing}
                 onPressSurah={this._onPressSurah}
                 onPlaySurah={this._onPlaySurah}
                 onPlayPauseSurah={this._onPauseSurah}
@@ -169,9 +171,7 @@ class PageLecture extends React.PureComponent {
     };
 
     _renderItem = (item) => {
-        let index = item.index;
         item = item.item;
-        item.index = index;
 
         return (
             <Ayah
@@ -180,7 +180,7 @@ class PageLecture extends React.PureComponent {
                 selected={!!this.state.selected.get(item.numberInSurah)}
                 data={item}
                 numberInSurah={item.numberInSurah}
-                index={index}
+                index={item.index}
             />
         )
     };
@@ -193,7 +193,9 @@ class PageLecture extends React.PureComponent {
         });
     };
 
-    _keyExtractor = (item) => item.index;
+    _keyExtractor = (item) => {
+        return item.index
+    }
 
     render() {
 

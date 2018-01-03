@@ -2,13 +2,23 @@ import React from 'react'
 import { Header, Button } from 'react-native-elements'
 import { StyleSheet, Text, View, FlatList , TouchableNativeFeedback} from 'react-native'
 
-export default class LectureHeader extends React.Component {
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state) => {
+    return {
+        surah: state.surahReducer,
+        surahList: state.surahListReducer,
+    };
+};
+
+class LectureHeader extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            isExpanded:false,
+            isExpanded: false,
+            isPlaying: this.props.surah.playing
         };
 
         this.icons = {
@@ -19,14 +29,14 @@ export default class LectureHeader extends React.Component {
         }
     }
 
-    componentWillMount () {
-        this.state.isPlaying = this.props.isPlaying
+    componentWillReceiveProps (nextProps) {
+        
     }
 
     _renderCenterComponent() {
         return (
             <View style={styles.titreSourateView} >
-                <Text style={styles.titreSourate}>{this.props.name}</Text>
+                <Text style={styles.titreSourate}>{this.props.surah.name}</Text>
             </View>
         )
     }
@@ -47,7 +57,9 @@ export default class LectureHeader extends React.Component {
                     buttonStyle={styles.boutonHeaderLecture}
                     icon={expandIcon}
                     onPress={ () => {
-                        this.setState( {isExpanded: !this.state.isExpanded})
+                        this.setState(previousState => {
+                          return { isExpanded: !previousState.isExpanded };
+                        });
                     }}
                 />
             </View>
@@ -57,10 +69,10 @@ export default class LectureHeader extends React.Component {
     _renderRightComponent() {
         let playerIcon;
 
-        if (this.state.isPlaying) {
-            playerIcon = this.icons.pause
+        if (this.this.props.surah.playing) {
+          playerIcon = this.icons.pause;
         } else {
-            playerIcon = this.icons.play
+          playerIcon = this.icons.play;
         }
 
         return (
@@ -69,7 +81,9 @@ export default class LectureHeader extends React.Component {
                     fontSize={14}
                     buttonStyle={styles.boutonHeaderLecture}
                     icon={playerIcon}
-                    onPress={this.props.onPlayPauseSurah}
+                    onPress={() => {
+                        this.props.onPlayPauseSurah(this.props.id);
+                    }}
                 />
             </View>
         )
@@ -84,6 +98,12 @@ export default class LectureHeader extends React.Component {
     _onPressSurah = (surahNumber) => this.props.onPressSurah(surahNumber);
 
     _renderItemSurahList = ({item}) => {
+        if (this.props.surah.playing) {
+          playerIcon = this.icons.pause;
+        } else {
+          playerIcon = this.icons.play;
+        }
+
         if (this.state.isExpanded) {
             return (
                 <TouchableNativeFeedback onPress={() => {
@@ -95,7 +115,7 @@ export default class LectureHeader extends React.Component {
                             <Button
                                 fontSize={18}
                                 buttonStyle={styles.boutonHeaderLecture}
-                                icon={this.icons.play} />
+                                icon={playerIcon} />
                         </View>
                         <View style={[styles.surahListItem, {flex:3}]}>
                             <Text style={{color:'#fffce8', fontSize:18}}>
@@ -138,7 +158,7 @@ export default class LectureHeader extends React.Component {
     render () {
         return (
             <FlatList
-                data={this.props.surahList}
+                data={this.props.data.surahList}
                 extraData={this.state.isExpanded}
                 renderItem={this._renderItemSurahList}
                 ListHeaderComponent={this._renderHeader(this)}
@@ -193,3 +213,4 @@ const styles = StyleSheet.create({
     }
 });
 
+export default connect(mapStateToProps)(LectureHeader)

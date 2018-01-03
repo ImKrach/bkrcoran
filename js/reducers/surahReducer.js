@@ -32,6 +32,7 @@ export default surahReducer = (state = initialState, action) => {
             // Adding playing = false for each ayah of the surah
             for (let i = 0; i < action.data.length; i++) {
                 action.data[i].playing = false;
+                action.data[i].index = i;
             }
             
             return {
