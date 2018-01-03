@@ -147,10 +147,6 @@ class PageLecture extends React.PureComponent {
         return (
             <LectureHeader
                 style={styles.lectureHeader}
-                name={this.props.surah.name}
-                id={this.props.surah.number}
-                data={this.props.surahList}
-                isPlaying={this.props.surah.playing}
                 onPressSurah={this._onPressSurah}
                 onPlaySurah={this._onPlaySurah}
                 onPlayPauseSurah={this._onPauseSurah}

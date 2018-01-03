@@ -18,7 +18,6 @@ class LectureHeader extends React.Component {
 
         this.state = {
             isExpanded: false,
-            isPlaying: this.props.surah.playing
         };
 
         this.icons = {
@@ -69,7 +68,7 @@ class LectureHeader extends React.Component {
     _renderRightComponent() {
         let playerIcon;
 
-        if (this.this.props.surah.playing) {
+        if (this.props.surah.playing) {
           playerIcon = this.icons.pause;
         } else {
           playerIcon = this.icons.play;
@@ -82,7 +81,7 @@ class LectureHeader extends React.Component {
                     buttonStyle={styles.boutonHeaderLecture}
                     icon={playerIcon}
                     onPress={() => {
-                        this.props.onPlayPauseSurah(this.props.id);
+                        this.props.onPlayPauseSurah(this.props.surah.number);
                     }}
                 />
             </View>
@@ -158,7 +157,7 @@ class LectureHeader extends React.Component {
     render () {
         return (
             <FlatList
-                data={this.props.data.surahList}
+                data={this.props.surahList}
                 extraData={this.state.isExpanded}
                 renderItem={this._renderItemSurahList}
                 ListHeaderComponent={this._renderHeader(this)}
