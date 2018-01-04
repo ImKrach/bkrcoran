@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableNativeFeedback } from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { Button, Badge } from 'react-native-elements'
 
 export default class Ayah extends React.Component {
@@ -15,7 +15,7 @@ export default class Ayah extends React.Component {
                     <Text>{this.props.data.tafsir}</Text>
                     <Button
                         backgroundColor="#2D5068"
-                        onPress={() => this.props.onPlayAyah(this.props.index)}
+                        onPress={() => this.props.onPlayAyah(this.props.ayahIndex)}
                         icon={{ name: 'play', type: 'font-awesome' }}
                         containerViewStyle={{flexWrap:'wrap',justifyContent:'center', alignSelf:'center', alignItems:'center', marginVertical:8}}
                         borderRadius={10}
@@ -26,22 +26,22 @@ export default class Ayah extends React.Component {
     }
 
     _onPress = () => {
-        this.props.onPressItem(this.props.numberInSurah);
+        this.props.onPressItem(this.props.ayahNumber);
     };
 
     render() {
         return (
-            <TouchableNativeFeedback {...this.props} style={styles.sectionAyah} onPress={this._onPress} >
+            <TouchableWithoutFeedback {...this.props} style={styles.sectionAyah} onPress={this._onPress} >
                 <View style={[styles.conteneurAyah]}>
                     <Badge containerStyle={styles.conteneurAyahNumber}>
-                        <Text style={styles.ayahNumberText}>{this.props.data.numberInSurah}</Text>
+                        <Text style={styles.ayahNumberText}>{this.props.data.ayahNumber}</Text>
                     </Badge>
                     <View style={styles.conteneurAyahText} >
                         <Text style={styles.ayahText}>{this.props.data.text}</Text>
                     </View>
                     {this._expand()}
                 </View>
-            </TouchableNativeFeedback>
+            </TouchableWithoutFeedback>
         )
     }
 

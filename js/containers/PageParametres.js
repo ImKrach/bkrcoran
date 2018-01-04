@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, Image } from 'react-native';
+import { Text, Image, View } from 'react-native';
+import { CheckBox } from "react-native-elements";
 
 import generalStyles from '../style'
 
@@ -13,11 +14,47 @@ export default class PageParametres extends React.Component {
 
     constructor (props) {
         super(props)
+
+        this.state = {
+            checked:true
+        }
     }
 
     render() {
         return (
-            <Text>Paramètres</Text>
+            <View>
+                <Text>Paramètres</Text>
+                <CheckBox
+                    center
+                    title='Arabe'
+                    iconRight
+                    checkedIcon='check-square-o'
+                    uncheckedIcon='square-o'
+                    checkedColor='green'
+                    uncheckedColor='#cccccc'
+                    checked={this.state.checked}
+                />
+                <CheckBox
+                    center
+                    title='Français'
+                    iconRight
+                    checkedIcon='check-square-o'
+                    uncheckedIcon='square-o'
+                    checkedColor='green'
+                    uncheckedColor='#cccccc'
+                    checked={this.state.checked}
+                />
+                <CheckBox
+                    center
+                    title='Phonétique'
+                    iconRight
+                    checkedIcon='check-square-o'
+                    uncheckedIcon='square-o'
+                    checkedColor='green'
+                    uncheckedColor='#cccccc'
+                    checked={this.state.checked}
+                />
+            </View>
         );
     }
 }

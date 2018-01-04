@@ -1,8 +1,22 @@
-import { FETCH_SURAH, FETCH_SURAH_SUCCESS, FETCH_SURAH_FAILURE, FETCH_EDITION, FETCH_EDITION_SUCCESS, FETCH_EDITION_FAILURE, CHANGE_SURAH, CHANGE_EDITION, FETCH_SURAH_LISTE, FETCH_SURAH_LISTE_SUCCESS, FETCH_SURAH_LISTE_FAILURE } from './constants'
+import {
+  FETCH_SURAH,
+  FETCH_SURAH_SUCCESS,
+  FETCH_SURAH_FAILURE,
+  FETCH_EDITION,
+  FETCH_EDITION_SUCCESS,
+  FETCH_EDITION_FAILURE,
+  CHANGE_SURAH,
+  CHANGE_EDITION,
+  FETCH_SURAH_LISTE,
+  FETCH_SURAH_LISTE_SUCCESS,
+  FETCH_SURAH_LISTE_FAILURE,
+  PLAY_SURAH,
+  PAUSE_SURAH
+} from "./constants";
 import axios from 'axios'
 
-export function fetchSurah(surahNumber, quranEdition = 'quran-complete', where = 'data') {
-    return (dispatch) => {
+export const fetchSurah = (surahNumber, quranEdition = 'quran-complete', where = 'data') => (dispatch) => {
+        
         dispatch(getSurah())
 
         switch (where) {
@@ -39,7 +53,7 @@ export function fetchSurah(surahNumber, quranEdition = 'quran-complete', where =
                 axios.get('http://api.alquran.cloud/surah/' + surahNumber + '/' + quranEdition)
                 .then((response) => {
                     // Réponse reçue
-                    dispatch(getSurahSuccess(response.data.data.ayahs, {name:response.data.data.name, nameTranslated:response.data.data.englishName}))
+                    dispatch(getSurahSuccess(response.data.data.ayahs, {name:response.data.data.name, nameTranslated:response.data.data.englishName, playing: false}))
                 })
                 .catch((err) => {
                     // Erreur
@@ -51,7 +65,8 @@ export function fetchSurah(surahNumber, quranEdition = 'quran-complete', where =
                 dispatch(getSurahFailure(err));
                 break;
         }
-    }
+        
+    return Promise.resolve();
 }
 
 export function fetchSurahList(quranEdition = 'quran-complete', where = 'data') {
@@ -81,6 +96,7 @@ export function fetchSurahList(quranEdition = 'quran-complete', where = 'data') 
                 for (i = 0; i < quran.length; i++) {
                     surahList.push({
                         "surahNumber" : quran[i].number,
+                        "surahIndex" : i,
                         "name" : quran[i].name,
                         "nameTranslated" : quran[i].englishName,
                         "revelationPlace" : quran[i].revelationType,
@@ -107,6 +123,16 @@ export function fetchSurahList(quranEdition = 'quran-complete', where = 'data') 
                 // Erreur
                 dispatch(getSurahListFailure(err))
                 break;
+        }
+    }
+}
+
+export function updateSurahPlayer(playing, surahIndex, ayahIndex) {
+    return (dispatch) => {
+        if (!playing) {
+            dispatch(pauseSurah(surahIndex, ayahIndex));
+        } else {
+            dispatch(playSurah(surahIndex, ayahIndex));
         }
     }
 }
@@ -166,5 +192,21 @@ function getEditionSuccess() {
 function getEditionFailure() {
     return {
         type: FETCH_EDITION_FAILURE
+    }
+}
+
+function playSurah(surahIndex, ayahIndex) {
+    return {
+        type: PLAY_SURAH,
+        surahIndex: surahIndex,
+        ayahIndex: ayahIndex
+    }
+}
+
+function pauseSurah(surahIndex, ayahIndex) {
+    return {
+        type: PAUSE_SURAH,
+        surahIndex: surahIndex,
+        ayahIndex: ayahIndex
     }
 }

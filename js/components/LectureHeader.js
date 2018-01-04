@@ -1,6 +1,12 @@
 import React from 'react'
 import { Header, Button } from 'react-native-elements'
-import { StyleSheet, Text, View, FlatList , TouchableNativeFeedback} from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableWithoutFeedback
+} from "react-native";
 
 import { connect } from 'react-redux'
 
@@ -34,9 +40,13 @@ class LectureHeader extends React.Component {
 
     _renderCenterComponent() {
         return (
-            <View style={styles.titreSourateView} >
-                <Text style={styles.titreSourate}>{this.props.surah.name}</Text>
-            </View>
+            <TouchableWithoutFeedback onPress = {() => {
+                this.props.prepareSurah(this.props.surah.surahIndex)
+            }}>
+                <View style={styles.titreSourateView} >
+                    <Text style={styles.titreSourate}>{this.props.surah.name}</Text>
+                </View>
+            </TouchableWithoutFeedback>
         )
     }
 
@@ -81,7 +91,7 @@ class LectureHeader extends React.Component {
                     buttonStyle={styles.boutonHeaderLecture}
                     icon={playerIcon}
                     onPress={() => {
-                        this.props.onPlayPauseSurah(this.props.surah.number);
+                        this.props.onPlayPauseSurah(this.props.surah.surahIndex);
                     }}
                 />
             </View>
@@ -92,12 +102,12 @@ class LectureHeader extends React.Component {
         return null
     };
 
-    _keyExtractor = (item) => item.surahNumber;
+    _keyExtractor = (item) => item.surahIndex;
 
     _renderItemSurahList = ({item}) => {
         let playerIcon
 
-        if (this.props.surah.playing) {
+        if (item.playing) {
           playerIcon = this.icons.pause;
         } else {
           playerIcon = this.icons.play;
@@ -105,10 +115,9 @@ class LectureHeader extends React.Component {
 
         if (this.state.isExpanded) {
             return (
-                <TouchableNativeFeedback onPress={() => {
-                    this.props.onPressSurah(item.surahNumber)
+                <TouchableWithoutFeedback onPress={() => {
+                    this.props.onPressSurah(item.surahIndex)
                     this.setState( {isExpanded: !this.state.isExpanded})
-                    this.refs._header.scrollTo({y:0})
                 }} >
                     <View style={styles.surahListItemContainer}>
                         <View style={[styles.surahListItem]}>
@@ -135,7 +144,7 @@ class LectureHeader extends React.Component {
                         </View>
                     </View>
 
-                </TouchableNativeFeedback>
+                </TouchableWithoutFeedback>
             )
         } else {
             return null
@@ -158,14 +167,13 @@ class LectureHeader extends React.Component {
     render () {
         return (
             <FlatList
-                data={this.props.surahList}
-                extraData={this.state.isExpanded}
+                ref='_header'
+                data={this.props.surahList.surahList}
                 renderItem={this._renderItemSurahList}
-                ListHeaderComponent={this._renderHeader(this)}
+                ListHeaderComponent={() => this._renderHeader(this)}
                 ItemSeparatorComponent={this._renderItemSurahListSeparator}
                 keyExtractor={this._keyExtractor}
-                style={{flex:1, backgroundColor:'#204965'}}
-                ref='_header'
+                style={{backgroundColor:'#204965'}}
             />
         )
     }
@@ -214,4 +222,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(mapStateToProps)(LectureHeader)
+export default connect(mapStateToProps)(LectureHeader);
