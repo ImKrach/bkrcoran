@@ -77,10 +77,8 @@ class PageLecture extends React.PureComponent {
     _onPauseSurah = (surahNumber) => {
         if (this.player instanceof Sound) {
             if (this.props.surah.playing) {
-                console.log("Pausing");
                 this.player.pause();
             } else {
-                console.log("Playing");
                 this.player.play();
             }
 
@@ -88,7 +86,6 @@ class PageLecture extends React.PureComponent {
             this.props.surah.playing = !this.props.surah.playing;
             
         } else {
-            console.log('Le player nexistait pas encore, on lance la ayah 0')
             this._onPlayAyah(0);
         }
     };

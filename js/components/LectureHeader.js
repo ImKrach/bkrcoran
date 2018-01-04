@@ -94,9 +94,9 @@ class LectureHeader extends React.Component {
 
     _keyExtractor = (item) => item.surahNumber;
 
-    _onPressSurah = (surahNumber) => this.props.onPressSurah(surahNumber);
-
     _renderItemSurahList = ({item}) => {
+        let playerIcon
+
         if (this.props.surah.playing) {
           playerIcon = this.icons.pause;
         } else {
@@ -106,8 +106,9 @@ class LectureHeader extends React.Component {
         if (this.state.isExpanded) {
             return (
                 <TouchableNativeFeedback onPress={() => {
-                    this._onPressSurah(item.surahNumber)
+                    this.props.onPressSurah(item.surahNumber)
                     this.setState( {isExpanded: !this.state.isExpanded})
+                    this.refs._header.scrollTo({y:0})
                 }} >
                     <View style={styles.surahListItemContainer}>
                         <View style={[styles.surahListItem]}>
@@ -164,6 +165,7 @@ class LectureHeader extends React.Component {
                 ItemSeparatorComponent={this._renderItemSurahListSeparator}
                 keyExtractor={this._keyExtractor}
                 style={{flex:1, backgroundColor:'#204965'}}
+                ref='_header'
             />
         )
     }
