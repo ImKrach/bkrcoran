@@ -1,10 +1,12 @@
 <?php
 
-// $tafsir = file_get_contents('./quran-tafsir.ar.muyassar.json');
-// $simple = file_get_contents('./quran-simple.json');
-// $audio = file_get_contents('./quran-audio.ar-alafasy.json');
-// $francais = file_get_contents('./quran-francais.fr.hamidullah.json');
-$tajweed = file_get_contents('./quran-tajweed-sub.json');
+ $tafsir = file_get_contents('./quran-tafsir.ar.muyassar.json');
+ $simple = file_get_contents('./quran-simple.json');
+ $audio = file_get_contents('./quran-audio.ar-alafasy.json');
+ $francais = file_get_contents('./quran-francais.fr.hamidullah.json');
+$phonetique = file_get_contents('./quran-phonetique.tr.transliteration.json');
+
+$max = file_get_contents('./quran-max.json');
 
 
 // $surahs_tafsir = json_decode($tafsir, true);
@@ -15,15 +17,17 @@ $tajweed = file_get_contents('./quran-tajweed-sub.json');
 // $surahs_audio = $surahs_audio["data"]["surahs"];
 // $surahs_francais = json_decode($francais, true);
 // $surahs_francais = $surahs_francais["data"]["surahs"];
-$surahs_tajweed = json_decode($tajweed, true);
-$surahs_tajweed = $surahs_tajweed["data"]["surahs"];
+//$surahs_phonetique = json_decode($phonetique, true);
+//$surahs_phonetique = $surahs_phonetique["data"]["surahs"];
+
+$surahs_max = json_decode($max, true);
 
 // $surahs_tafsirEnglish = json_decode($tafsir, true);
 // $surahs_tafsirEnglish = $surahs_tafsirEnglish["data"]["surahs"];
 
 
-echo "<pre>";
-print_r($surahs_tajweed);
+//echo "<pre>";
+//print_r($surahs_tajweed);
 
 // $output = $surahs_simple;
 
@@ -32,36 +36,59 @@ print_r($surahs_tajweed);
 
 // echo "<pre>";
 
-foreach ($surahs_tajweed as $indexSurah => &$surah) {
+foreach ($surahs_max as $indexSurah => &$surah) {
 
     foreach ($surah["ayahs"] as $indexAyah => &$ayah) {
-		// echo $indexSurah+1 . ":" . $indexAyah+1 . "<br>" .
 
-		// if ($indexAyah > 100) die;
-
-		// echo $ayah["text"] . "<br>" ;
-
-		// 	print_r($test);
-		// 	die;
-		// }
-
-
-		
+        $ayah["phonetique"] = str_replace('e', 'a', $ayah["phonetique"]);
+        $ayah["phonetique"] = str_replace('v', 'w', $ayah["phonetique"]);
+        $ayah["phonetique"] = str_replace('c', 'j', $ayah["phonetique"]);
+//        'ḳ'
+//        'ş'
+    }
+    
+}
 
 
-		$temp = array();
-		$temp = str_split($ayah["text"]);
+// // print_r($surahs_simple);
+
+$outputJSON = json_encode($surahs_max);
 
 
-		$ayah["text"] = array();
-		$ayah["text"] = $temp;
+//$fp = fopen('quran-max.json', 'w');
+//fwrite($fp, $outputJSON);
+//fclose($fp);
 
-    	// $ayah["audio"]        = $surahs_audio[$indexSurah]["ayahs"][$indexAyah]["audio"];
-		// $ayah["tafsir"]       = $surahs_tafsir[$indexSurah]["ayahs"][$indexAyah]["tafsir"];
-		// $ayah["textFrancais"] = $surahs_francais[$indexSurah]["ayahs"][$indexAyah]["textFrancais"];
-		// $ayah["tajweed"]      = $surahs_tajweed[$indexSurah]["ayahs"][$indexAyah]["text"];
+// echo $outputJSON;
 
-		// // Hamzat ul Wasl
+// echo "surahs_tafsir : <br>";
+// foreach ($surahs_tafsir as $key => $value) {
+//     echo "key : $key, value : $value <br>";
+// }
+
+// echo "surahs_audio : <br>";
+// foreach ($surahs_audio as $key => $value) {
+//     echo "key : $key, value : $value <br>";
+// }
+
+// echo "surahs_francais : <br>";
+// foreach ($surahs_francais as $key => $value) {
+//     echo "key : $key, value : $value <br>";
+// }
+
+
+
+// echo "</pre>";
+
+
+
+
+
+
+
+
+
+// // Hamzat ul Wasl
 		// $ayah["tajweed"] = preg_replace('/\[h:?[0-9]*\[/', '<Text style={styles.ham_wasl}>', $ayah["tajweed"]);
 		// // Silent
 		// $ayah["tajweed"] = preg_replace('/\[s:?[0-9]*\[/', '<Text style={styles.slnt}>', $ayah["tajweed"]);
@@ -111,41 +138,5 @@ foreach ($surahs_tajweed as $indexSurah => &$surah) {
 		// // </Text>
 		// $ayah["tajweed"] = preg_replace('/\]/', '</Text>', $ayah["tajweed"]);
 
-    
-}
 
 
-	print_r($surahs_tajweed);
-echo '</pre>';
-die;
-
-// // print_r($surahs_simple);
-
-$outputJSON = json_encode($surahs_tajweed);
-
-
-$fp = fopen('quran-dev1.json', 'w');
-fwrite($fp, $outputJSON);
-fclose($fp);
-
-// echo $outputJSON;
-
-// echo "surahs_tafsir : <br>";
-// foreach ($surahs_tafsir as $key => $value) {
-//     echo "key : $key, value : $value <br>";
-// }
-
-// echo "surahs_audio : <br>";
-// foreach ($surahs_audio as $key => $value) {
-//     echo "key : $key, value : $value <br>";
-// }
-
-// echo "surahs_francais : <br>";
-// foreach ($surahs_francais as $key => $value) {
-//     echo "key : $key, value : $value <br>";
-// }
-
-
-
-// echo "</pre>";
-?>

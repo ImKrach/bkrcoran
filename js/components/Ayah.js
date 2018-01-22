@@ -1,8 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { Button, Badge } from 'react-native-elements'
+import { connect } from 'react-redux'
 
-export default class Ayah extends React.Component {
+const mapStateToProps = (state) => {
+    return {
+        settings: state.settingsReducer
+    };
+}
+
+class Ayah extends React.Component {
 
     constructor(props) {
         super(props)
@@ -29,6 +36,30 @@ export default class Ayah extends React.Component {
         this.props.onPressItem(this.props.ayahNumber);
     };
 
+    _francais = () => {
+        if (this.props.settings.francais) {
+            return(
+                <View style={[styles.conteneurAyahText, {alignSelf:'flex-start', alignItems:'flex-start'}]} >
+                    <Text style={[styles.ayahText, {fontSize:14}]}>{this.props.data.textFrancais}</Text>
+                </View>
+            )
+        } else {
+            return null
+        }
+    }
+
+    _phonetique = () => {
+        if (this.props.settings.phonetique) {
+            return(
+                <View style={[styles.conteneurAyahText, {alignSelf:'flex-start', alignItems:'flex-start'}]} >
+                    <Text style={[styles.ayahText, {fontSize:14}]}>{this.props.data.phonetique}</Text>
+                </View>
+            )
+        } else {
+            return null
+        }
+    }
+
     render() {
         return (
             <TouchableWithoutFeedback {...this.props} style={styles.sectionAyah} onPress={this._onPress} >
@@ -39,6 +70,8 @@ export default class Ayah extends React.Component {
                     <View style={styles.conteneurAyahText} >
                         <Text style={styles.ayahText}>{this.props.data.text}</Text>
                     </View>
+                    {this._francais()}
+                    {this._phonetique()}
                     {this._expand()}
                 </View>
             </TouchableWithoutFeedback>
@@ -86,6 +119,8 @@ const styles = StyleSheet.create({
         color:'#000000',
     },
 });
+
+export default connect(mapStateToProps)(Ayah)
 
 // dark red #800000
 // darker red #400000

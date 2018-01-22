@@ -41,8 +41,11 @@ class LectureHeader extends React.Component {
     _renderCenterComponent() {
         return (
             <TouchableWithoutFeedback onPress = {() => {
-                this.props.prepareSurah(this.props.surah.surahIndex)
-            }}>
+                        this.setState(previousState => {
+                          return { isExpanded: !previousState.isExpanded };
+                        });
+                        this.props.toggleBar(this.state.isExpanded);
+                    }}>
                 <View style={styles.titreSourateView} >
                     <Text style={styles.titreSourate}>{this.props.surah.name}</Text>
                 </View>
@@ -69,6 +72,7 @@ class LectureHeader extends React.Component {
                         this.setState(previousState => {
                           return { isExpanded: !previousState.isExpanded };
                         });
+                        this.props.toggleBar(this.state.isExpanded);                        
                     }}
                 />
             </View>
@@ -116,7 +120,7 @@ class LectureHeader extends React.Component {
         if (this.state.isExpanded) {
             return (
                 <TouchableWithoutFeedback onPress={() => {
-                    this.props.onPressSurah(item.surahIndex)
+                    this.props.onPressSurah(item.surahNumber)
                     this.setState( {isExpanded: !this.state.isExpanded})
                 }} >
                     <View style={styles.surahListItemContainer}>
